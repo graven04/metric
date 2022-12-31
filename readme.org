@@ -1,0 +1,116 @@
+#+TITLE: Metric data
+#+AUTHOR: Rajesh Gaire
+#+auto_tangle: t
+#+PROPERTY: header-args:python :tangle ./init.py  :session "true" :results output
+#  LocalWords:  Rajesh Gaire args HDI Gini TODO GINI repo readme py
+#  LocalWords:  wbdata abc venv txt src datetime GBR gdp 063307e
+#  LocalWords:  dtype float64 virtualenv pyvenv eglot
+
+
+* Why the metric came about:
+
+Often when some looks at living standard for a country they look at *GDP per Capita* or *GDP* in general. While this is the most popular way, because it is easy to find and easy to compare, it is not the best way. For example the metric of GDP per capita can be misleading, it does not take into consideration happiness of the country of the income inequality.
+
+Over time *HDI* became the best way to measure social welfare and living standards as it is a better reflection. It included things like level of education and level of health care along with other factors that determine the welfare of a population. I initially though of the metric by combining two different metrics into one. My though process: " GDP and GDP per Capita are very easy to use and compare for social welfare but they are not the whole picture", "*Gini* coefficient is also very useful as it shows the income inequality of a country and its also very comparable", it would be nice if one metric could tell you a bit of both, i.e. the what proportion of GDP .... TODO", "Why not do *( 1-GINI )(GDP)* or *( 1-GINI )(GDP per Capita)*".
+
+_NB:_ If you are reading or following the repo while this sentance is still here you will notice that the metric is always refered to as the metric which can be very confusing, it will stay this way untill a name for it is found. Name suggestions are welcome. 
+
+* About this repo:
+This is a literate document show the code as well as what it means and what the results mean. it will show you how to use the metric visually through examples. 
+
+This repository is here to show you how to use the metric and how it is calculated. It also serves to give an example of the results that using the metric brings about and they potentially mean. The =readme.org= file is actually a *literate document* It uses the *World Bank* data API module in python, *"wbdata"* and *"pandas"* to get the data and python to manipulate and display it. This is not in anyway economic theory or backed up by any research, just musings by me. 
+
+_Note about .org files:_
+=.org= files are org files. Not to be confused with Lotus Organiser file format.  Org is a plain text file that uses marksown like syntax. To use org files to full potential us =Emacs= the /best/ extensible text editor. Or just view it in github which renders it lke any other =.md= file.
+
+** Important note about "*wbdata*" module.
+If you want to clone this repo and try out the code there could be some troubles. I am currently using =Python 3.10.9=. The wbdata module in this version throws an error when using the API. This can be solved by moving to version 3.6 or lower or by replacing the line in the =API.py= file in the module folder which is usually found in file path: =~/.local/lib/python3.10/site-packages/wbdata/api.py.=
+To check on your system where it is just run ~sudo pip show wbdata~ or ~pip show wbdata~.
+
+Line to replace:
+=import collections=
+to 
+=import collections.abc as collections=
+
+This is a temporary hack until it is properly fixed in the repo of "wbdata".
+
+** Using the virtual environment setup
+
+If you wish you may also use the virtual environment made in the repo using python =venv=, this will ensure that no unexpected or versioning errors occur. If you wish to so this, then just clone the repository but *do not* install the requirements.txt as they are already installed and modified in the .venv folder. To activate the virtual environment just make the file =activate= executable and execute it. To exit the virtual environment just type ~deactivate~.
+
+* What the metrics mean 
+
+** 
+
+** 
+
+
+* The Metric in action
+Some function definitions and imports to make our life easier down the line.
+
+lets import all we need.
+
+#+begin_src python :results output :session "true"
+import pandas
+import wbdata
+import datetime
+#+end_src
+
+#+RESULTS:
+
+Now we want to define a few function that will give us the value of =GDP= and =GINI= coefficent given the name of country and time frame.
+
+#+begin_src python :results output :session "true"
+
+
+def get_gdp(country, time):
+
+    """ This gets the GDP of "country" in year "time" through the
+    World Bank database. It gets GDP in constant
+    international dollars, Indicator code: NY.GDP.MKTP.PP.CD"""
+    data = wbdata.api.get_dataframe({"NY.GDP.MKTP.PP.CD": "GDP"}, country=country, data_date=time)
+    return data._get_value(0, 0, takeable=True)
+
+
+def get_gini(country, time):
+    """ This gets the GDP of "country" in year "time"
+    through the World Bank database. Indicator code: SI.POV.GINI"""
+    data = wbdata.api.get_dataframe({"SI.POV.GINI": "GINI"}, country=country, data_date=time)
+    return data._get_value(0, 0, takeable=True)
+#+end_src
+
+#+RESULTS:
+
+** Testing on the UK
+let us use the code that we have writen to get the =GDP= and =GINI coefficent= for the UK.
+
+#+begin_src python :results output :session "true"
+
+country = "GBR"
+time = datetime.datetime(2017, 1, 1), datetime.datetime(2017, 1, 1)
+  
+# gdp_uk = get_gdp(country, time)
+gdp_uk = "{:,}".format(get_gdp(country, time))
+
+gini_uk = get_gini(country, time)
+
+print(f"In the UK GDP at 2017 was ${gdp_uk}, and the GINI coefficent at 2017 was: {gini_uk}")
+
+#+end_src
+
+#+RESULTS:
+: In the UK GDP at 2017 was $3,063,306,948,134.75, and the GINI coefficent at 2017 was: 35.1
+
+Let us now calculate the metric for the UK.
+
+#+begin_src python :results output :session "true"
+
+metric = float(get_gdp(country, time)) * ((100 - gini_uk)/100)
+printable_metric =  "{:,}".format(metric)
+
+print(f"Metric for UK in 2017 was: £{printable_metric}")
+
+#+end_src
+
+#+RESULTS:
+: Metric for UK in 2017 was: £1,988,086,209,339.453

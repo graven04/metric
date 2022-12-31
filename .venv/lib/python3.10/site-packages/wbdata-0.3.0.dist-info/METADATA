@@ -1,0 +1,43 @@
+Metadata-Version: 2.1
+Name: wbdata
+Version: 0.3.0
+Summary: A library to access World Bank data
+License: GPL-2.0+
+Author: Oliver Sherouse
+Author-email: oliver@oliversherouse.com
+Requires-Python: >=3.6
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Scientific/Engineering
+Provides-Extra: docs
+Provides-Extra: pandas
+Requires-Dist: appdirs (>=1.4,<2.0)
+Requires-Dist: decorator (>=4.0)
+Requires-Dist: pandas (>=0.17); extra == "pandas"
+Requires-Dist: requests (>=2.0)
+Requires-Dist: sphinx (>=2.2); extra == "docs"
+Requires-Dist: tabulate (>=0.8.5)
+Description-Content-Type: text/markdown
+
+# wbdata
+
+| Branch | Status                                                                                                                                                                                                     |
+|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| master | [![master branch status](https://github.com/OliverSherouse/wbdata/workflows/Tests/badge.svg?branch=master)](https://github.com/OliverSherouse/wbdata/actions?query=workflow%3A%22Tests%22+branch%3Amaster) |
+| dev    | [![dev branch status](https://github.com/OliverSherouse/wbdata/workflows/Tests/badge.svg?branch=dev)](https://github.com/OliverSherouse/wbdata/actions?query=workflow%3A%22Tests%22+branch%3Adev)          |
+
+Wbdata is a simple python interface to find and request information from the
+World Bank's various databases, either as a dictionary containing full metadata
+or as a [pandas](http://pandas.pydata.org) DataFrame or series. Currently,
+wbdata wraps most of the [World Bank
+API](http://data.worldbank.org/developers/api-overview), and also adds some
+convenience functions for searching and retrieving information.
+
+Documentation is available at <http://wbdata.readthedocs.org/> .
+
