@@ -1,7 +1,7 @@
 #+TITLE: Metric data
 #+AUTHOR: Rajesh Gaire
 #+auto_tangle: t
-#+PROPERTY: header-args:python :tangle ./init.py  :session "true" :results output
+#+PROPERTY: header-args:python :tangle ./init.py  :session "true" :results output :export both
 #  LocalWords:  Rajesh Gaire args HDI Gini TODO GINI repo readme py
 #  LocalWords:  wbdata abc venv txt src datetime GBR gdp 063307e
 #  LocalWords:  dtype float64 virtualenv pyvenv eglot
@@ -36,13 +36,15 @@ This is a temporary hack until it is properly fixed in the repo of "wbdata".
 
 ** Using the virtual environment setup
 
-If you wish you may also use the virtual environment made in the repo using python =venv=, this will ensure that no unexpected or versioning errors occur. If you wish to so this, then just clone the repository but *do not* install the requirements.txt as they are already installed and modified in the .venv folder. To activate the virtual environment just make the file =activate= executable and execute it. To exit the virtual environment just type ~deactivate~.
+If you wish you may also use the virtual environment made in the repo using python =venv=, this will ensure that no unexpected or versioning errors occur. If you wish to so this, then just clone the repository but *do not* install the requirements.txt as they are already installed and modified in the .venv folder. To activate the virtual environment type ~source $PWD/.venv/bin/activate~ inside te git clone or project folder. To exit the virtual environment just type ~deactivate~.
 
-* What the metrics mean 
+* TODO What the metrics mean 
 
-** 
+** the normal one
 
-** 
+** social productivity one?
+social productivity is the metric divided my the working population (changes in this is increse in socila productivity
+
 
 
 * The Metric in action
@@ -114,3 +116,8 @@ print(f"Metric for UK in 2017 was: £{printable_metric}")
 
 #+RESULTS:
 : Metric for UK in 2017 was: £1,988,086,209,339.453
+
+This represents
+
+** TODO complete
+
