@@ -1,7 +1,7 @@
 #+TITLE: Metric data
 #+AUTHOR: Rajesh Gaire
 #+auto_tangle: t
-#+PROPERTY: header-args:python :tangle ./init.py  :session "true" :results output :export both
+#+PROPERTY: header-args:python :tangle ./init.py  :session "true" :results output :exports both
 #  LocalWords:  Rajesh Gaire args HDI Gini TODO GINI repo readme py
 #  LocalWords:  wbdata abc venv txt src datetime GBR gdp 063307e
 #  LocalWords:  dtype float64 virtualenv pyvenv eglot
