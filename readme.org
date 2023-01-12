@@ -62,7 +62,7 @@ import datetime
 
 Now we want to define a few function that will give us the value of =GDP= and =GINI= coefficent given the name of country and time frame.
 
-#+begin_src python :results output :session "true"
+#+begin_src python :results output :session "true" :exports both
 
 
 def get_gdp(country, time):
@@ -86,7 +86,7 @@ def get_gini(country, time):
 ** Testing on the UK
 let us use the code that we have writen to get the =GDP= and =GINI coefficent= for the UK.
 
-#+begin_src python :results output :session "true"
+#+begin_src python :results output :session "true" :exports both
 
 country = "GBR"
 time = datetime.datetime(2017, 1, 1), datetime.datetime(2017, 1, 1)
@@ -105,7 +105,7 @@ print(f"In the UK GDP at 2017 was ${gdp_uk}, and the GINI coefficent at 2017 was
 
 Let us now calculate the metric for the UK.
 
-#+begin_src python :results output :session "true"
+#+begin_src python :results output :session "true" :exports both
 
 metric = float(get_gdp(country, time)) * ((100 - gini_uk)/100)
 printable_metric =  "{:,}".format(metric)
